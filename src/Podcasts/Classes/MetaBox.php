@@ -7,11 +7,18 @@ class MetaBox
 {
     public static $fieldPrefix = 'podcats';
     public static $field = '_podcats_meta';
-
     private $typesPosts;
+    private $default = [];
 
     public function __construct()
     {
+        $this->default = [
+            'audio' => false,
+            'description' => false,
+            'extra' => false,
+            'explicit' => 'no',
+        ];
+
         $this->typesPosts = [TypePosts::$type];
         add_action('admin_init', [$this, 'addFields']);
         add_action('save_post', [$this, 'save'], 0);
@@ -33,13 +40,14 @@ class MetaBox
 
     public function markup($post)
     {
+
         ?>
         <p>
             <label>
                 audio:
                 <br>
                 <input type="text" name="<?php echo self::$fieldPrefix; ?>[audio]"
-                       value="<?php echo get_post_meta($post->ID, 'audio', 1); ?>"
+                       value="<?php echo $this->getData($post->ID, 'audio'); ?>"
                 />
             </label>
         </p>
@@ -48,14 +56,14 @@ class MetaBox
             <label>
                 description:
                 <br>
-                <textarea type="text" name="<?php echo self::$fieldPrefix; ?>[description]" style="width:100%;height:50px;"><?php echo get_post_meta($post->ID, 'description', 1); ?></textarea>
+                <textarea type="text" name="<?php echo self::$fieldPrefix; ?>[description]"><?php echo $this->getData($post->ID, 'description'); ?></textarea>
             </label>
         </p>
 
         <p>
             <label>
                 extra<br>
-                <textarea type="text" name="<?php echo self::$fieldPrefix; ?>[extra]" style="width:100%;height:50px;"><?php echo get_post_meta($post->ID, 'extra', 1); ?></textarea>
+                <textarea type="text" name="<?php echo self::$fieldPrefix; ?>[extra]"><?php echo $this->getData($post->ID, 'extra'); ?></textarea>
             </label>
         </p>
 
@@ -63,7 +71,7 @@ class MetaBox
             <label>
                 explicit: <br>
                 <select name="<?php echo self::$fieldPrefix; ?>[explicit]">
-                    <?php $value = get_post_meta($post->ID, 'explicit', 1); ?>
+                    <?php $value = $this->getData($post->ID, 'explicit', 'explicit'); ?>
                     <option value="1" <?php selected($value, 'yes') ?> ><?php _e('Да', 'Podcasts'); ?></option>
                     <option value="2" <?php selected($value, 'no') ?> ><?php _e('Нет', 'Podcasts'); ?></option>
                 </select>
@@ -74,9 +82,25 @@ class MetaBox
         <?php
     }
 
-
-    public function save($post_id)
+    private function getData($id, $key, $name = false)
     {
+        if (!empty($name)) {
+            $metaKey = $name;
+        } else {
+            $metaKey = self::$field;
+        }
+
+
+        $meta = get_post_meta($id, $metaKey, true);
+
+        $meta = wp_parse_args($meta, $this->default);
+
+        return (isset($meta[$key]) ? $meta[$key] : false);
+    }
+
+    public function save($id)
+    {
+
         if (empty($_POST[self::$fieldPrefix])) {
             return false;
         }
@@ -85,20 +109,16 @@ class MetaBox
             return false;
         }
 
-        if (wp_is_post_autosave($post_id) || wp_is_post_revision($post_id)) {
+        if (wp_is_post_autosave($id) || wp_is_post_revision($id)) {
             return false;
         }
 
-        $_POST[self::$fieldPrefix] = array_map('sanitize_text_field', $_POST[self::$fieldPrefix]);
-        foreach ($_POST[self::$fieldPrefix] as $key => $value) {
-            if (empty($value)) {
-                delete_post_meta($post_id, $key);
-                continue;
-            }
+        $data = array_map('sanitize_text_field', $_POST[self::$fieldPrefix]);
 
-            update_post_meta($post_id, $key, $value);
-        }
+        $data = wp_parse_args($data, $this->default);
 
-        return $post_id;
+        update_post_meta($id, self::$field, $data);
+
+        return $id;
     }
 }
