@@ -3,11 +3,16 @@
 namespace Podcasts\Classes;
 
 
+use Podcasts\Utils\Assets;
+
 class MetaBox
 {
+    use Assets;
+
     public static $fieldPrefix = 'podcats';
     public static $field = '_podcats_meta';
     private $typesPosts;
+    private $typePost;
     private $default = [];
 
     public function __construct()
@@ -19,11 +24,20 @@ class MetaBox
             'explicit' => 'no',
         ];
 
+        $this->typePost = TypePosts::$type;
         $this->typesPosts = [TypePosts::$type];
         add_action('admin_init', [$this, 'addFields']);
         add_action('save_post', [$this, 'save'], 0);
+        add_action('current_screen', [$this, 'scripts']);
     }
 
+    public function scripts()
+    {
+        $screen = get_current_screen();
+        if ('post' == $screen->base && $this->typePost == $screen->post_type) {
+            $this->addJs('uploader', 'admin');
+        }
+    }
 
     /**
      * Добавляем метабокс
