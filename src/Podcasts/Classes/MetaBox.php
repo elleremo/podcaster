@@ -90,7 +90,6 @@ class MetaBox
             $metaKey = self::$field;
         }
 
-
         $meta = get_post_meta($id, $metaKey, true);
 
         $meta = wp_parse_args($meta, $this->default);
