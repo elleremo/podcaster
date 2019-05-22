@@ -14,3 +14,13 @@ jQuery(function ($) {
   })
 
 })
+
+// items_frame = wp.media.frames.items = wp.media({
+//   title: 'Add to Gallery',
+//   button: {
+//     text: 'Select'
+//   },
+//   library: {
+//     type: [ 'video', 'image' ]
+//   },
+// });
