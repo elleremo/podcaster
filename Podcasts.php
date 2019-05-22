@@ -9,33 +9,37 @@ Version: 1.0.1
 License: GPLv3
 */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+if (!defined('ABSPATH')) {
+    exit;
 }
 
-require_once( plugin_dir_path( __FILE__ )."includes/Autoloader.php" );
+require_once(plugin_dir_path(__FILE__) . "includes/Autoloader.php");
 
-if(file_exists(plugin_dir_path(__FILE__)."vendor/autoload.php")) {
+if (file_exists(plugin_dir_path(__FILE__) . "vendor/autoload.php")) {
     require_once(plugin_dir_path(__FILE__) . "vendor/autoload.php");
 }
 
 use Podcasts\Autoloader;
 
-new Autoloader( __FILE__, 'Podcasts' );
+new Autoloader(__FILE__, 'Podcasts');
 
 use Podcasts\Base\Wrap;
+use Podcasts\Classes\TypePosts;
 
-class Podcasts extends Wrap {
-	public $version = '1.0.1';
+class Podcasts extends Wrap
+{
+    public $version = '1.0.1';
 
-	public function __construct() {
-
-	}
+    public function __construct()
+    {
+        new TypePosts();
+    }
 
 }
 
-function Podcasts__init() {
-	new Podcasts();
+function Podcasts__init()
+{
+    new Podcasts();
 }
 
-add_action( 'plugins_loaded', 'Podcasts__init', 30 );
+add_action('plugins_loaded', 'Podcasts__init', 21);
