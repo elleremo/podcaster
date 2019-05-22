@@ -5,7 +5,7 @@ Author: Elleremo
 Text Domain: Podcasts
 Domain Path: /languages
 Requires PHP: 7.0
-Version: 1.0.1
+Version: 1.0.0
 License: GPLv3
 */
 
@@ -24,15 +24,17 @@ use Podcasts\Autoloader;
 new Autoloader(__FILE__, 'Podcasts');
 
 use Podcasts\Base\Wrap;
+use Podcasts\Classes\MetaBox;
 use Podcasts\Classes\TypePosts;
 
 class Podcasts extends Wrap
 {
-    public $version = '1.0.1';
+    public $version = '1.0.0';
 
     public function __construct()
     {
         new TypePosts();
+        new MetaBox();
     }
 
 }
