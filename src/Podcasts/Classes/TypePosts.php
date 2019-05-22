@@ -1,12 +1,18 @@
 <?php
 
-namespace src\Podcasts\Classes;
+namespace Podcasts\Classes;
 
 
 class TypePosts
 {
     public static $type = 'podcast';
     public static $taxonomy = 'podcast-page';
+
+    public function __construct()
+    {
+        add_action('init', [$this, 'post_type']);
+        add_action('init', [$this, 'taxonomy']);
+    }
 
     /**
      * Регистрируем тип поста
@@ -29,19 +35,23 @@ class TypePosts
                     'not_found_in_trash' => __('В корзине книг не подкастов', 'Podcasts'),
                     'menu_name' => __('Подкасты', 'Podcasts'),
                 ],
-                'public' => true,
-                'publicly_queryable' => true,
+                'public' => false,
+                'publicly_queryable' => false,
                 'show_ui' => true,
                 'show_in_menu' => true,
-                'query_var' => true,
-                'rewrite' => true,
+                'query_var' => false,
+                'rewrite' => false,
                 'capability_type' => 'post',
                 'has_archive' => true,
                 'hierarchical' => false,
                 'menu_position' => 5,
                 'menu_icon' => 'dashicons-microphone',
                 'taxonomies' => [self::$taxonomy],
-                'supports' => ['title'],
+                'supports' => [
+                    'title',
+                    'author',
+                    'thumbnail'
+                ],
             ]);
     }
 
