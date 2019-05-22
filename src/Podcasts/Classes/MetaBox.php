@@ -25,6 +25,9 @@ class MetaBox
     }
 
 
+    /**
+     * Добавляем метабокс
+     */
     public function addFields()
     {
         add_meta_box(
@@ -40,7 +43,6 @@ class MetaBox
 
     public function markup($post)
     {
-
         ?>
         <p>
             <label>
@@ -82,6 +84,14 @@ class MetaBox
         <?php
     }
 
+    /**
+     * Получение данных по умолчанию и данных метаполей
+     *
+     * @param $id - id поста
+     * @param $key - индекс опцции
+     * @param bool|string - false или строка/ключ мета поля
+     * @return mixed
+     */
     private function getData($id, $key, $name = false)
     {
         if (!empty($name)) {
@@ -97,6 +107,12 @@ class MetaBox
         return (isset($meta[$key]) ? $meta[$key] : false);
     }
 
+    /**
+     * Сохранение метаполей
+     *
+     * @param $id
+     * @return bool
+     */
     public function save($id)
     {
 
