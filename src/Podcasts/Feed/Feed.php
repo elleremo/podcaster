@@ -17,7 +17,7 @@ class Feed
         register_activation_hook($instance->file, [$this, 'activate']);
         register_deactivation_hook($instance->file, [$this, 'deactivate']);
 
-        add_action("template_redirect", [$this, "template_rule"]);
+        add_action("template_redirect", [$this, "templateFule"]);
         add_action('init', [$this, 'addFeed']);
     }
 
@@ -26,7 +26,7 @@ class Feed
         add_feed(self::$slug, [$this, 'markup']);
     }
 
-    function template_rule()
+    function templateFule()
     {
         global $wp_query;
         if (strpos($wp_query->query_vars['feed'], self::$slug) !== false) {
