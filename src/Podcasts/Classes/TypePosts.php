@@ -8,6 +8,9 @@ class TypePosts
     public static $type = 'podcast';
     public static $taxonomy = 'podcast-page';
 
+    /**
+     * Регистрируем тип поста
+     */
     public function post_type()
     {
         register_post_type(
@@ -42,6 +45,9 @@ class TypePosts
             ]);
     }
 
+    /**
+     * Регистрируем таксонимию
+     */
     public function taxonomy()
     {
         $labels = [
