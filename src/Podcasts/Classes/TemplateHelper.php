@@ -30,7 +30,9 @@ class TemplateHelper
         $atts = wp_parse_args($atts, $default);
 
         if (!file_exists($this->pluginTemplatePath($file))) {
-            d('File not exists ', $this->pluginTemplatePath($file));
+            if(function_exists('d')) {
+                d('File not exists ', $this->pluginTemplatePath($file));
+            }
             return false;
         }
 
