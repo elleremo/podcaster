@@ -26,6 +26,7 @@ new Autoloader(__FILE__, 'Podcasts');
 use Podcasts\Base\Wrap;
 use Podcasts\Classes\MetaBox;
 use Podcasts\Classes\TypePosts;
+use Podcasts\Feed\Feed;
 
 class Podcasts extends Wrap
 {
@@ -35,6 +36,7 @@ class Podcasts extends Wrap
     {
         new TypePosts();
         new MetaBox();
+        new Feed($this);
     }
 
 }

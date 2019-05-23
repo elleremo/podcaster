@@ -3,14 +3,18 @@
 namespace Podcasts\Feed;
 
 
+use Podcasts\Classes\TemplateHelper;
+
 class Feed
 {
     private $version;
     private $plugin_path;
     public static $slug = 'podcast';
+    private $instance;
 
     function __construct($instance)
     {
+        $this->instance = $instance;
         $this->plugin_path = $instance->path;
         $this->version = $instance->version;
 
@@ -36,10 +40,19 @@ class Feed
         }
     }
 
+    public function template($name)
+    {
+        $class = new TemplateHelper($this->instance);
+
+        return $class->getTemplatePart($name);
+    }
+
     public function markup()
     {
         header('Content-Type: ' . feed_content_type('rss-http') . '; charset=' . get_option('blog_charset'), true);
         status_header(200);
+
+        echo $this->template('feed');
 
         exit;
     }
