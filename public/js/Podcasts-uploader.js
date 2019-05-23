@@ -1,26 +1,70 @@
-jQuery(function ($) {
-  $('[name="podcats[audio]"]').on('click', function () {
-    var elem = $(this)
+var $ = jQuery.noConflict()
 
-    wp.media.editor.send.attachment = function (info, file) {
-      console.log(info)
-      console.log(file)
+var PodcastsUploader = {
+
+  mediaUploader: false,
+
+  run: function () {
+
+    var this_class = this
+
+    this_class.trigger('[name="podcats[audio]"]')
+
+  },
+
+  trigger: function (selector) {
+
+    var this_class = this
+
+    $(selector).on('click', function (e) {
+      e.preventDefault()
+
+      this_class.uploader($(this))
+
+    })
+  },
+
+  uploader: function (selector) {
+    var state
+    var this_class = this
+
+    if (this_class.mediaUploader) {
+      this_class.mediaUploader.open()
+      return
     }
 
-    wp.media.editor.open(this)
+    state = wp.media
 
-    return false
+    this_class.mediaUploader = wp.media({
 
-  })
+      title: 'Title',
+      library: {
+        type: ['audio'],
+      },
+      multiple: false,
+      button: {
+        text: 'text',
+      },
 
+    })
+
+    this_class.mediaUploader.on('select', function () {
+
+      var json = this_class.mediaUploader.state().
+        get('selection').
+        first().
+        toJSON()
+
+      selector.val(json.id)
+
+      wp.media = state
+
+    })
+
+    this_class.mediaUploader.open()
+  },
+}
+
+$(document).ready(function () {
+  PodcastsUploader.run()
 })
-
-// items_frame = wp.media.frames.items = wp.media({
-//   title: 'Add to Gallery',
-//   button: {
-//     text: 'Select'
-//   },
-//   library: {
-//     type: [ 'video', 'image' ]
-//   },
-// });
