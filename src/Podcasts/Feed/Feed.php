@@ -26,7 +26,7 @@ class Feed
         add_feed(self::$slug, [$this, 'markup']);
     }
 
-    function templateFile()
+    public function templateFile()
     {
         global $wp_query;
         if (strpos($wp_query->query_vars['feed'], self::$slug) !== false) {
@@ -36,7 +36,7 @@ class Feed
         }
     }
 
-    function markup()
+    public function markup()
     {
         header('Content-Type: ' . feed_content_type('rss-http') . '; charset=' . get_option('blog_charset'), true);
         status_header(200);
