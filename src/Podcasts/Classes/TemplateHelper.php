@@ -10,7 +10,7 @@ class TemplateHelper
 
     public function __construct($instance)
     {
-        $this->plugin_path = $instance->path;
+        $this->plugin_path = $instance->pluginDir();
         $this->version = $instance->version;
     }
 
@@ -29,7 +29,7 @@ class TemplateHelper
     {
         $atts = wp_parse_args($atts, $default);
 
-        if (file_exists($this->pluginTemplatePath($file))) {
+        if (!file_exists($this->pluginTemplatePath($file))) {
             d('File not exists ', $this->pluginTemplatePath($file));
             return false;
         }
