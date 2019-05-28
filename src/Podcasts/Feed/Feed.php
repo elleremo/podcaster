@@ -4,6 +4,8 @@ namespace Podcasts\Feed;
 
 
 use Podcasts\Classes\TemplateHelper;
+use Podcasts\Classes\TypePosts;
+use Podcasts\Data\Extract;
 
 class Feed
 {
@@ -44,7 +46,16 @@ class Feed
     {
         $class = new TemplateHelper($this->instance);
 
-        return $class->getTemplatePart($name);
+        $extract = new Extract();
+        $atts = [];
+
+        $atts['extract'] = $extract;
+        $atts['posts'] = $extract->preparePost(get_posts([
+            'post_type' => TypePosts::$type
+        ]));
+
+
+        return $class->getTemplatePart($name, $atts);
     }
 
     public function markup()

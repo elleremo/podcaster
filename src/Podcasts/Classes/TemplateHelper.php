@@ -3,8 +3,6 @@
 namespace Podcasts\Classes;
 
 
-use Podcasts\Data\Extract;
-
 class TemplateHelper
 {
     private $plugin_path;
@@ -22,26 +20,24 @@ class TemplateHelper
      * @param $file
      * @return string
      */
-    public function pluginTemplatePath($file)
+    public function pluginTemplatePath($file, $atts = [])
     {
         return $this->plugin_path . 'templates/' . $file . '.php';
     }
 
     public function getTemplatePart($file, $atts = [], $default = [])
     {
-        $atts['extract'] = new Extract();
-
         $atts = wp_parse_args($atts, $default);
 
-        if (!file_exists($this->pluginTemplatePath($file))) {
+        if (!file_exists($this->pluginTemplatePath($file, $atts))) {
             if (function_exists('d')) {
-                d('File not exists ', $this->pluginTemplatePath($file));
+                d('File not exists ', $this->pluginTemplatePath($file, $atts));
             }
             return false;
         }
 
         ob_start();
-        include $this->pluginTemplatePath($file);
+        include $this->pluginTemplatePath($file, $atts);
         return ob_get_clean();
     }
 
