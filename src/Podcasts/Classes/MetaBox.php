@@ -93,6 +93,13 @@ class MetaBox
 
         <p>
             <label>
+                subtitle<br>
+                <textarea type="text" name="<?php echo self::$fieldPrefix; ?>[subtitle]"><?php echo $this->getData($post->ID, 'subtitle'); ?></textarea>
+            </label>
+        </p>
+
+        <p>
+            <label>
                 explicit: <br>
                 <select name="<?php echo self::$fieldPrefix; ?>[explicit]">
                     <?php $value = $this->getData($post->ID, 'explicit', 'explicit'); ?>
