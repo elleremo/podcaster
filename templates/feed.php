@@ -84,7 +84,7 @@
         <generator>https://wordpress.org/?v=5.2.1</generator>
 
 
-        <?php foreach ($post as $post) : ?>
+        <?php foreach ($posts as $post) : ?>
 
             <item>
                 <title><?php echo esc_html($post->post_title); ?></title>
