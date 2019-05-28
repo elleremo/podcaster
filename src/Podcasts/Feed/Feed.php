@@ -54,7 +54,6 @@ class Feed
             'post_type' => TypePosts::$type
         ]));
 
-
         return $class->getTemplatePart($name, $atts);
     }
 
