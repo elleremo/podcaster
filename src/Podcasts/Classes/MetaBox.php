@@ -72,7 +72,7 @@ class MetaBox
             <label>
                 keywords:
                 <br>
-                <textarea type="text" name="<?php echo self::$fieldPrefix; ?>[keywords]"><?php echo $this->getData($post->ID, 'keywords'); ?></textarea>
+                <textarea type="text" maxlength="255" name="<?php echo self::$fieldPrefix; ?>[keywords]"><?php echo $this->getData($post->ID, 'keywords'); ?></textarea>
             </label>
         </p>
 
