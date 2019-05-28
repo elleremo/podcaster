@@ -70,6 +70,14 @@ class MetaBox
 
         <p>
             <label>
+                keywords:
+                <br>
+                <textarea type="text" name="<?php echo self::$fieldPrefix; ?>[keywords]"><?php echo $this->getData($post->ID, 'keywords'); ?></textarea>
+            </label>
+        </p>
+
+        <p>
+            <label>
                 description:
                 <br>
                 <textarea type="text" name="<?php echo self::$fieldPrefix; ?>[description]"><?php echo $this->getData($post->ID, 'description'); ?></textarea>
