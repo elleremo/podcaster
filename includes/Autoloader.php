@@ -17,6 +17,7 @@ namespace Podcasts;
 			$this->addNamespaceObject( "Widgets" );
 			$this->addNamespaceObject( "Classes" );
 			$this->addNamespaceObject( "Feed" );
+			$this->addNamespaceObject( "Data" );
 		}
 
 		/**
