@@ -109,6 +109,17 @@ class MetaBox
             </label>
         </p>
 
+        <p>
+            <label>
+                block: <br>
+                <select name="<?php echo self::$fieldPrefix; ?>[explicit]">
+                    <?php $value = $this->getData($post->ID, 'block', 'block'); ?>
+                    <option value="1" <?php selected($value, 'yes') ?> ><?php _e('Да', 'Podcasts'); ?></option>
+                    <option value="2" <?php selected($value, 'no') ?> ><?php _e('Нет', 'Podcasts'); ?></option>
+                </select>
+            </label>
+        </p>
+
         <input type="hidden" name="<?php echo self::$fieldPrefix; ?>_fields_nonce" value="<?php echo wp_create_nonce(__FILE__); ?>"/>
         <?php
     }
