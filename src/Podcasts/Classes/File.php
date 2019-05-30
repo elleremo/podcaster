@@ -11,7 +11,7 @@ class File
     public function __construct($id)
     {
         $this->id = $id;
-        $data = wp_get_attachment_metadata($this->id);
+        $this->data = wp_get_attachment_metadata($this->id);
     }
 
     public function getMimeType()
