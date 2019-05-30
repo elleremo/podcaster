@@ -225,7 +225,7 @@ class MetaBox
         <p>
             <label>
                 explicit: <br>
-                <select name="<?php echo self::$fieldPrefix; ?>[explicit]">
+                <select name="<?php echo self::$fieldPrefix; ?>[explicit]" name="explicit" >
                     <?php $value = $this->getData($post->ID, 'explicit', 'explicit'); ?>
                     <option value="1" <?php selected($value, 'yes') ?> ><?php _e('Да', 'Podcasts'); ?></option>
                     <option value="2" <?php selected($value, 'no') ?> ><?php _e('Нет', 'Podcasts'); ?></option>
@@ -236,7 +236,7 @@ class MetaBox
         <p>
             <label>
                 block: <br>
-                <select name="<?php echo self::$fieldPrefix; ?>[block]">
+                <select name="<?php echo self::$fieldPrefix; ?>[block]" name="label">
                     <?php $value = $this->getData($post->ID, 'block', 'block'); ?>
                     <option value="1" <?php selected($value, 'yes') ?> ><?php _e('Да', 'Podcasts'); ?></option>
                     <option value="2" <?php selected($value, 'no') ?> ><?php _e('Нет', 'Podcasts'); ?></option>
