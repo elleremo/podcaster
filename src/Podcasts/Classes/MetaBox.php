@@ -22,6 +22,7 @@ class MetaBox
             'description' => false,
             'extra' => false,
             'explicit' => 'no',
+            'block' =>'no',
         ];
 
         $this->typePost = TypePosts::$type;
