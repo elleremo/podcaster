@@ -23,11 +23,19 @@ class File
     }
 
     public function getSize()
-    {
+    {getFileUrl
         if (!isset($this->data['filesize'])) {
             return false;
         }
         return $this->data['filesize'];
+    }
+
+    public function getFileUrl()
+    {
+        if (!isset($this->data['filesize'])) {
+            return false;
+        }
+        return wp_get_attachment_url($this->id);
     }
 
 }
