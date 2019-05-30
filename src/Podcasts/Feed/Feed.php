@@ -25,6 +25,12 @@ class Feed
 
         add_action("template_redirect", [$this, "templateFile"]);
         add_action('init', [$this, 'addFeed']);
+
+        add_action('init', function (){
+            $extract = new Extract();
+            d($extract);
+        });
+
     }
 
     public function addFeed()
@@ -67,13 +73,10 @@ class Feed
         exit;
     }
 
-    public function activate()
+    public  static function activate()
     {
+        add_feed(self::$slug ,'__return_empty_string');
         flush_rewrite_rules();
     }
 
-    public function deactivate()
-    {
-        flush_rewrite_rules();
-    }
 }

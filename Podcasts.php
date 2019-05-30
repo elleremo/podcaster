@@ -42,20 +42,23 @@ class Podcasts extends Wrap
     /**
      * On activate plugin
      */
-    public static function activate(){
+    public function activate()
+    {
+        Feed::activate();
         flush_rewrite_rules();
     }
 
     /**
      * On deactivate plugin
      */
-    public static function deactivate(){
+    public static function deactivate()
+    {
         flush_rewrite_rules();
     }
 }
 
-register_activation_hook( __FILE__, [ 'Podcasts', 'activate' ] );
-register_deactivation_hook( __FILE__, [ 'Podcasts', 'deactivate' ] );
+register_activation_hook(__FILE__, ['Podcasts', 'activate']);
+register_deactivation_hook(__FILE__, ['Podcasts', 'deactivate']);
 
 function Podcasts__init()
 {
