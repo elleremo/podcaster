@@ -26,13 +26,14 @@ class MetaBox
         add_action('current_screen', [$this, 'scripts']);
     }
 
-    public static function getDefaultFields(){
+    public static function getDefaultFields()
+    {
         return [
             'audio' => false,
             'description' => false,
             'extra' => false,
             'explicit' => 'no',
-            'block' =>'no',
+            'block' => 'no',
         ];
     }
 
@@ -181,43 +182,43 @@ class MetaBox
 
         <p>
             <label>
-                extra<br>
+                extra:<br>
                 <textarea type="text" name="<?php echo self::$fieldPrefix; ?>[extra]"><?php echo $this->getData($post->ID, 'extra'); ?></textarea>
             </label>
         </p>
 
         <p>
             <label>
-                subtitle<br>
+                subtitle:<br>
                 <textarea type="text" name="<?php echo self::$fieldPrefix; ?>[subtitle]"><?php echo $this->getData($post->ID, 'subtitle'); ?></textarea>
             </label>
         </p>
 
         <p>
             <label>
-                summary<br>
+                summary:<br>
                 <textarea type="summary" maxlength="4000" name="<?php echo self::$fieldPrefix; ?>[summary]"><?php echo $this->getData($post->ID, 'summary'); ?></textarea>
             </label>
         </p>
 
         <p>
             <label>
-                copyright<br>
+                copyright:<br>
                 <input type="text" name="<?php echo self::$fieldPrefix; ?>[copyright]" value="<?php echo $this->getData($post->ID, 'copyright'); ?>"/>
             </label>
         </p>
 
         <p>
             <label>
-                link<br>
-<!--                https://creativecommons.org/licenses/by/4.0/-->
+                link: <br>
+                <!--                https://creativecommons.org/licenses/by/4.0/-->
                 <input type="link" name="<?php echo self::$fieldPrefix; ?>[link]" value="<?php echo $this->getData($post->ID, 'link'); ?>"/>
             </label>
         </p>
 
         <p>
             <label>
-                author<br>
+                author: <br>
                 <input type="email" name="<?php echo self::$fieldPrefix; ?>[author]" value="<?php echo $this->getData($post->ID, 'author'); ?>"/>
             </label>
         </p>
@@ -225,7 +226,7 @@ class MetaBox
         <p>
             <label>
                 explicit: <br>
-                <select name="<?php echo self::$fieldPrefix; ?>[explicit]" name="explicit" >
+                <select name="<?php echo self::$fieldPrefix; ?>[explicit]">
                     <?php $value = $this->getData($post->ID, 'explicit', 'explicit'); ?>
                     <option value="1" <?php selected($value, 'yes') ?> ><?php _e('Да', 'Podcasts'); ?></option>
                     <option value="2" <?php selected($value, 'no') ?> ><?php _e('Нет', 'Podcasts'); ?></option>
@@ -236,7 +237,7 @@ class MetaBox
         <p>
             <label>
                 block: <br>
-                <select name="<?php echo self::$fieldPrefix; ?>[block]" name="label">
+                <select name="<?php echo self::$fieldPrefix; ?>[block]">
                     <?php $value = $this->getData($post->ID, 'block', 'block'); ?>
                     <option value="1" <?php selected($value, 'yes') ?> ><?php _e('Да', 'Podcasts'); ?></option>
                     <option value="2" <?php selected($value, 'no') ?> ><?php _e('Нет', 'Podcasts'); ?></option>
@@ -295,6 +296,8 @@ class MetaBox
         $data = array_map('sanitize_text_field', $_POST[self::$fieldPrefix]);
 
         $data = wp_parse_args($data, $this->default);
+
+        array_map('trim', $data);
 
         update_post_meta($id, self::$field, $data);
 
