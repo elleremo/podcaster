@@ -17,19 +17,23 @@ class MetaBox
 
     public function __construct()
     {
-        $this->default = [
-            'audio' => false,
-            'description' => false,
-            'extra' => false,
-            'explicit' => 'no',
-            'block' =>'no',
-        ];
+        $this->default = $this->getDefaultFields();
 
         $this->typePost = TypePosts::$type;
         $this->typesPosts = [TypePosts::$type];
         add_action('admin_init', [$this, 'addFields']);
         add_action('save_post', [$this, 'save'], 0);
         add_action('current_screen', [$this, 'scripts']);
+    }
+
+    public static function getDefaultFields(){
+        return [
+            'audio' => false,
+            'description' => false,
+            'extra' => false,
+            'explicit' => 'no',
+            'block' =>'no',
+        ];
     }
 
     public function scripts()
