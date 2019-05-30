@@ -25,12 +25,6 @@ class Feed
 
         add_action("template_redirect", [$this, "templateFile"]);
         add_action('init', [$this, 'addFeed']);
-
-        add_action('init', function (){
-            $extract = new Extract();
-            d($extract);
-        });
-
     }
 
     public function addFeed()
