@@ -100,6 +100,13 @@ class MetaBox
 
         <p>
             <label>
+                copyright<br>
+                <input type="text" name="<?php echo self::$fieldPrefix; ?>[copyright]" value="<?php echo $this->getData($post->ID, 'copyright'); ?>"/>
+            </label>
+        </p>
+
+        <p>
+            <label>
                 explicit: <br>
                 <select name="<?php echo self::$fieldPrefix; ?>[explicit]">
                     <?php $value = $this->getData($post->ID, 'explicit', 'explicit'); ?>
