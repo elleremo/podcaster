@@ -23,7 +23,7 @@ class File
     }
 
     public function getSize()
-    {getFileUrl
+    {
         if (!isset($this->data['filesize'])) {
             return false;
         }
