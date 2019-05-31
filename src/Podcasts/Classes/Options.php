@@ -8,6 +8,7 @@ class Options
 
     public static $slug = 'podcasts-option';
     private $type;
+    public static $optionCommonPrefix = 'podcasts-option';
 
     public function __construct($type)
     {
@@ -15,7 +16,12 @@ class Options
         add_action('admin_menu', [$this, 'subPage']);
     }
 
-    // TODO see https://github.com/petrozavodsky/Tstore/blob/master/src/Tstore/Shop/PageOptions.php
+    //explicit
+    //author
+    //owner - email - name
+    //image - 170x170 / 300x300 jpg png
+    //block -optional
+
     public function subPage()
     {
         add_submenu_page(
@@ -42,6 +48,40 @@ class Options
 
         $this->field(
             'base',
+            'link',
+            [
+                'tag' => 'input',
+                'attrs' => [
+                    'required' => 'required',
+                    'type' => 'url'
+                ]
+            ]
+        );
+
+        $this->field(
+            'base',
+            'subtitle',
+            [
+                'tag' => 'input',
+                'attrs' => [
+                    'required' => 'required'
+                ]
+            ]
+        );
+
+        $this->field(
+            'base',
+            'summary',
+            [
+                'tag' => 'input',
+                'attrs' => [
+                    'required' => 'required'
+                ]
+            ]
+        );
+
+        $this->field(
+            'base',
             'copyright',
             [
                 'tag' => 'input',
@@ -51,6 +91,7 @@ class Options
             ]
         );
 
+        register_setting(self::$slug, self::$optionCommonPrefix);
     }
 
     private function field($sectionPrefix, $name = '', $data = '')
@@ -65,8 +106,6 @@ class Options
             self::$slug . "_{$sectionPrefix}_section"
         );
 
-        register_setting(self::$slug, self::$slug . "_{$name}_field");
-
     }
 
     private function fieldRender($name, $data)
@@ -77,6 +116,8 @@ class Options
             'attrs' => [],
             'value' => ''
         ]);
+
+        $commonNamePrefix = self::$optionCommonPrefix;
 
         $class = ' regular-text ';
         if (isset($data['attrs']['class'])) {
@@ -97,9 +138,9 @@ class Options
 
         $out = '';
         if ('input' == $data['tag']) {
-            $out = "<input name='{$data['name']}' value='{$data['value']}' class='{$class}' {$attributes()} >";
+            $out = "<input name='{$commonNamePrefix}[{$data['name']}]' value='{$data['value']}' class='{$class}' {$attributes()} >";
         } else if ('textarea' == $data['tag']) {
-            $out = "<textarea name='{$data['name']}' class='{$class}' {$attributes()} >{$data['value']}</textarea>";
+            $out = "<textarea name='{$commonNamePrefix}[{$data['name']}]' class='{$class}' {$attributes()} >{$data['value']}</textarea>";
         }
 
         return $out;
@@ -132,16 +173,6 @@ class Options
         </form>
         <?php
     }
-
-    //explicit
-    //subtitle
-    //summary
-    //author
-    //owner - email - name
-    //image - 170x170 / 300x300 jpg png
-    //block -optional
-    //copyright
-    // link - website link
 
     public function categoriesSelectBox($name)
     {
