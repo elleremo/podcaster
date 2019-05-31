@@ -239,8 +239,8 @@ class MetaBox
                 block: <br>
                 <select name="<?php echo self::$fieldPrefix; ?>[block]">
                     <?php $value = $this->getData($post->ID, 'block', 'block'); ?>
-                    <option value="1" <?php selected($value, 'yes') ?> ><?php _e('Да', 'Podcasts'); ?></option>
-                    <option value="2" <?php selected($value, 'no') ?> ><?php _e('Нет', 'Podcasts'); ?></option>
+                    <option value="yes" <?php selected($value, 'yes') ?> ><?php _e('Да', 'Podcasts'); ?></option>
+                    <option value="no" <?php selected($value, 'no') ?> ><?php _e('Нет', 'Podcasts'); ?></option>
                 </select>
             </label>
         </p>

@@ -25,6 +25,19 @@ class Feed
 
         add_action("template_redirect", [$this, "templateFile"]);
         add_action('init', [$this, 'addFeed']);
+//        add_action('init', function (){
+//            $class = new TemplateHelper($this->instance);
+//
+//            $extract = new Extract();
+//            $atts = [];
+//
+//            $atts['extract'] = $extract;
+//            $atts['posts'] = $extract->preparePost(get_posts([
+//                'post_type' => TypePosts::$type
+//            ]));
+//            d($atts);
+//
+//        });
     }
 
     public function addFeed()
@@ -67,9 +80,9 @@ class Feed
         exit;
     }
 
-    public  static function activate()
+    public static function activate()
     {
-        add_feed(self::$slug ,'__return_empty_string');
+        add_feed(self::$slug, '__return_empty_string');
         flush_rewrite_rules();
     }
 

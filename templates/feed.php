@@ -70,27 +70,28 @@ echo '<?xml version="1.0" encoding="' . get_option('blog_charset') . '"?' . '>';
                 <pubDate><?php echo esc_html(mysql2date('D, d M Y H:i:s +0000', get_post_time('Y-m-d H:i:s', true, $post), false)); ?></pubDate>
                 <dc:creator>Команда MojoMedia</dc:creator>
                 <guid isPermaLink="false">https://mojomedia.ru/?post_type=audio&#038;p=1037</guid>
-                <description><![CDATA[Праздники закончились, пора возвращаться в реальность. И чтоб вам было не так грустно, записали подкаст. Не грустите.]]></description>
+                <description><![CDATA[<?php echo $post['meta']['description']; ?>]]></description>
 
-                <itunes:subtitle>
-                    <![CDATA[Праздники закончились, пора возвращаться в реальность. И чтоб вам было не так грустно, записали подкаст. Не грустите.... ]]>
-                </itunes:subtitle>
+                <itunes:subtitle><![CDATA[<?php echo $post['meta']['description']; ?>]]></itunes:subtitle>
                 <itunes:image href="https://mojomedia.ru/wp-content/uploads/2018/09/my-v-etom-zhivyom.png"/>
-                <content:encoded><![CDATA[Праздники закончились, пора возвращаться в реальность. И чтоб вам было не так грустно, записали подкаст. Не грустите.]]>
-                </content:encoded>
-                <itunes:summary><![CDATA[Праздники закончились, пора возвращаться в реальность. И чтоб вам было не так грустно, записали подкаст. Не грустите.]]>
-                </itunes:summary>
-                <googleplay:description><![CDATA[Праздники закончились, пора возвращаться в реальность. И чтоб вам было не так грустно, записали подкаст. Не грустите.]]>
+                <content:encoded><![CDATA[<?php echo $post['meta']['description']; ?>]]></content:encoded>
+                <itunes:summary><![CDATA[<?php echo $post['meta']['summary']; ?>]]></itunes:summary>
+
+                <googleplay:description><![CDATA[<?php echo $post['meta']['description']; ?>]]>
                 </googleplay:description>
-                <enclosure url="https://mojomedia.ru/wp-content/uploads/2019/05/Vypusk-31-s04-Zanudstvo.mp3"
-                           length="120792756"
-                           type="audio/mpeg"/>
-                <media:content url="https://mojomedia.ru/wp-content/uploads/2019/05/Vypusk-31-s04-Zanudstvo.mp3"
-                               fileSize="120792756"
-                               type="audio/mpeg"/>
-                <itunes:explicit>yes</itunes:explicit>
-                <googleplay:explicit>yes</googleplay:explicit>
+                <enclosure url="<?php echo $post['meta']['audio_meta']['url']; ?>"
+                           length="<?php echo $post['meta']['audio_meta']['fileSize']; ?>"
+                           type="<?php echo $post['meta']['audio_meta']['type']; ?>"/>
+
+                <media:content url="<?php echo $post['meta']['audio_meta']['url']; ?>"
+                               fileSize="<?php echo $post['meta']['audio_meta']['fileSize']; ?>"
+                               type="<?php echo $post['meta']['audio_meta']['type']; ?>"/>
+
+                <itunes:explicit><?php echo $post['meta']['explicit']; ?></itunes:explicit>
+                <googleplay:explicit><?php echo $post['meta']['explicit']; ?></googleplay:explicit>
+
                 <itunes:duration>50:20</itunes:duration>
+
                 <itunes:author>Команда MojoMedia</itunes:author>
             </item>
 
