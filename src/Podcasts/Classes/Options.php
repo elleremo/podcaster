@@ -27,19 +27,78 @@ class Options
             [$this, 'PageContent']
         );
 
+        $this->section('base', "Common settings", "<p> Settings </p>");
+
+        $this->field(
+            'base',
+            'title',
+            [
+                'tag' => 'input',
+                'attrs' => [
+                    'required' => 'required'
+                ]
+            ]
+        );
+
+        $this->field(
+            'base',
+            'copyright',
+            [
+                'tag' => 'input',
+                'attrs' => [
+                    'required' => 'required'
+                ]
+            ]
+        );
     }
 
-    private function field($sectionPrefix, $name = '', $html = '')
+    private function field($sectionPrefix, $name = '', $data = '')
     {
         add_settings_field(
             self::$slug . "_{$sectionPrefix}_field",
-            $name,
-            function () use ($html) {
-                echo $html;
+            $name.":",
+            function () use ($name, $data) {
+                echo $this->fieldRender($name, $data);
             },
             self::$slug,
             self::$slug . "_{$sectionPrefix}_section"
         );
+    }
+
+    private function fieldRender($name, $data)
+    {
+        $data = wp_parse_args($data, [
+            'tag' => 'input',
+            'name' => $name,
+            'attrs' => [],
+            'value' => ''
+        ]);
+
+        $class = ' regular-text ';
+        if (isset($data['attrs']['class'])) {
+            $class .= $data['attrs']['class'];
+            unset($data['attrs']['class']);
+        }
+
+        $attributes = function () use ($data) {
+            $out = '';
+            if (empty($data['attrs'])) {
+                return $out;
+            }
+            foreach ($data['attrs'] as $k => $v) {
+                $out .= " {$k}='{$v}' ";
+            }
+            return $out;
+        };
+
+        $out = '';
+        if ('input' == $data['tag']) {
+            $out = "<input name='{$data['name']}' value='{$data['value']}' class='{$class}' {$attributes()} >";
+        } else if ('textarea' == $data['tag']) {
+            $out = "<textarea name='{$data['name']}' class='{$class}' {$attributes()} >{$data['value']}</textarea>";
+        }
+
+        return $out;
     }
 
     private function section($prefix, $name = '', $html = '')
