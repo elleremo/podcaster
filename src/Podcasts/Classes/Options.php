@@ -17,7 +17,6 @@ class Options
     }
 
     //explicit
-    //author
     //owner - email - name
     //image - 170x170 / 300x300 jpg png
     //block -optional
@@ -64,7 +63,8 @@ class Options
             [
                 'tag' => 'textarea',
                 'attrs' => [
-                    'required' => 'required'
+                    'required' => 'required',
+                    'rows' => 6,
                 ]
             ]
         );
@@ -72,6 +72,17 @@ class Options
         $this->field(
             'base',
             'summary',
+            [
+                'tag' => 'textarea',
+                'attrs' => [
+                    'required' => 'required'
+                ]
+            ]
+        );
+
+        $this->field(
+            'base',
+            'author',
             [
                 'tag' => 'input',
                 'attrs' => [
@@ -120,6 +131,7 @@ class Options
         $commonNamePrefix = self::$optionCommonPrefix;
 
         $class = ' regular-text ';
+
         if (isset($data['attrs']['class'])) {
             $class .= $data['attrs']['class'];
             unset($data['attrs']['class']);
