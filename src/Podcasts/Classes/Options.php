@@ -15,6 +15,7 @@ class Options
         add_action('admin_menu', [$this, 'subPage']);
     }
 
+    // TODO see https://github.com/petrozavodsky/Tstore/blob/master/src/Tstore/Shop/PageOptions.php
     public function subPage()
     {
         add_submenu_page(
