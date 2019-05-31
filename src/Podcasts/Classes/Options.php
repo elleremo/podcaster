@@ -75,7 +75,8 @@ class Options
             [
                 'tag' => 'textarea',
                 'attrs' => [
-                    'required' => 'required'
+                    'required' => 'required',
+                    'rows' => 6,
                 ]
             ]
         );
