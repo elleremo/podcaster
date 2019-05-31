@@ -181,7 +181,6 @@ class Options
         } else if ('select' == $data['tag']) {
             $out .= "<section name='{$commonNamePrefix}[{$data['name']}]' class='{$class}' {$attributes()} >";
             foreach ($data['options'] as $key => $value) {
-                d($key , $value);
                 $out .= "<option value='{$key}' " . selected($data['selected'], $key, false) . " >{$value}</option>";
             }
             $out .= "</section>";
