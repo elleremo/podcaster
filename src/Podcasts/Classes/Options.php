@@ -62,7 +62,7 @@ class Options
             'base',
             'subtitle',
             [
-                'tag' => 'input',
+                'tag' => 'textarea',
                 'attrs' => [
                     'required' => 'required'
                 ]
@@ -98,7 +98,7 @@ class Options
     {
         add_settings_field(
             self::$slug . "_{$name}_field",
-            $name . ":",
+            $name,
             function () use ($name, $data) {
                 echo $this->fieldRender($name, $data);
             },
