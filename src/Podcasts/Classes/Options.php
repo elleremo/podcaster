@@ -26,9 +26,36 @@ class Options
             self::$slug,
             [$this, 'PageContent']
         );
+
     }
 
-    public function PageContent(){
+    private function field($sectionPrefix, $name = '', $html = '')
+    {
+        add_settings_field(
+            self::$slug . "_{$sectionPrefix}_field",
+            $name,
+            function () use ($html) {
+                echo $html;
+            },
+            self::$slug,
+            self::$slug . "_{$sectionPrefix}_section"
+        );
+    }
+
+    private function section($prefix, $name = '', $html = '')
+    {
+        add_settings_section(
+            self::$slug . "_{$prefix}_section",
+            $name,
+            function () use ($html) {
+                echo $html;
+            },
+            self::$slug
+        );
+    }
+
+    public function PageContent()
+    {
         ?>
         <div class="wrap">
             <h2> <?php echo get_admin_page_title(); ?> </h2>
