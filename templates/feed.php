@@ -71,7 +71,7 @@ echo '<?xml version="1.0" encoding="' . get_option('blog_charset') . '"?' . '>';
 
                 <guid isPermaLink="false"><?php echo esc_html(add_query_arg(site_url(), ['p' => $post['ID']])); ?></guid>
                 <itunes:subtitle><![CDATA[<?php echo $post['meta']['subtitle']; ?>]]></itunes:subtitle>
-                <itunes:image href="https://mojomedia.ru/wp-content/uploads/2018/09/my-v-etom-zhivyom.png"/>
+                <itunes:image href="<?php echo $post['thumbnail'];?>"/>
 
                 <description><![CDATA[<?php echo $post['meta']['description']; ?>]]></description>
                 <googleplay:description><![CDATA[<?php echo $post['meta']['description']; ?>]]></googleplay:description>

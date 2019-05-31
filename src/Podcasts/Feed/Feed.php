@@ -25,19 +25,19 @@ class Feed
 
         add_action("template_redirect", [$this, "templateFile"]);
         add_action('init', [$this, 'addFeed']);
-//        add_action('init', function (){
-//            $class = new TemplateHelper($this->instance);
-//
-//            $extract = new Extract();
-//            $atts = [];
-//
-//            $atts['extract'] = $extract;
-//            $atts['posts'] = $extract->preparePost(get_posts([
-//                'post_type' => TypePosts::$type
-//            ]));
-//            d($atts);
-//
-//        });
+
+
+        add_action('init', function (){
+
+            $extract = new Extract();
+            $atts = [];
+
+            $atts['extract'] = $extract;
+            $atts['posts'] = $extract->preparePost(get_posts([
+                'post_type' => TypePosts::$type
+            ]));
+
+        });
     }
 
     public function addFeed()
