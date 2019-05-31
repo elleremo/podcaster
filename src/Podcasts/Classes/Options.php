@@ -50,19 +50,23 @@ class Options
                 ]
             ]
         );
+
     }
 
     private function field($sectionPrefix, $name = '', $data = '')
     {
         add_settings_field(
-            self::$slug . "_{$sectionPrefix}_field",
-            $name.":",
+            self::$slug . "_{$name}_field",
+            $name . ":",
             function () use ($name, $data) {
                 echo $this->fieldRender($name, $data);
             },
             self::$slug,
             self::$slug . "_{$sectionPrefix}_section"
         );
+
+        register_setting(self::$slug, self::$slug . "_{$name}_field");
+
     }
 
     private function fieldRender($name, $data)
