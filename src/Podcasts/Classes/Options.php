@@ -103,6 +103,23 @@ class Options
             ]
         );
 
+        $this->field(
+            'base',
+            'explicit',
+            [
+                'tag' => 'select',
+                'attrs' => [
+                    'required' => 'required'
+                ],
+                'options' => [
+                    'yes' => 'yes',
+                    'no' => 'no',
+                    'clean' => 'clean'
+                ],
+                'selected' => 'clean',
+            ]
+        );
+
         register_setting(self::$slug, self::$optionCommonPrefix);
     }
 
@@ -122,12 +139,19 @@ class Options
 
     private function fieldRender($name, $data)
     {
-        $data = wp_parse_args($data, [
+        $default = [
             'tag' => 'input',
             'name' => $name,
             'attrs' => [],
             'value' => ''
-        ]);
+        ];
+
+        if ('select' == $data['tag']) {
+            $data['options'] = [];
+            $data['selected'] = '';
+        }
+
+        $data = wp_parse_args($data, $default);
 
         $commonNamePrefix = self::$optionCommonPrefix;
 
@@ -154,6 +178,12 @@ class Options
             $out = "<input name='{$commonNamePrefix}[{$data['name']}]' value='{$data['value']}' class='{$class}' {$attributes()} >";
         } else if ('textarea' == $data['tag']) {
             $out = "<textarea name='{$commonNamePrefix}[{$data['name']}]' class='{$class}' {$attributes()} >{$data['value']}</textarea>";
+        } else if ('select' == $data['tag']) {
+            $out .= "<section name='{$commonNamePrefix}[{$data['name']}]' class='{$class}' {$attributes()} >";
+            foreach ($data['options'] as $key => $value) {
+                $out .= "<option value='{$key}' " . selected($data['selected'], $key, false) . " >{$value}</option>";
+            }
+            $out .= "</section>";
         }
 
         return $out;
