@@ -19,7 +19,7 @@ class Options
     public function subPage()
     {
         add_submenu_page(
-            "edit.php?post_type=" . self::$slug,
+            "edit.php?post_type={$this->type}",
             'Podcasts settings',
             'Podcasts options',
             'edit_others_posts',
