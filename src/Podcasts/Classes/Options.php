@@ -6,6 +6,17 @@ namespace Podcasts\Classes;
 class Options
 {
 
+
+    //explicit
+    //subtitle
+    //summary
+    //author
+    //owner - email - name
+    //image - 170x170 / 300x300 jpg png
+    //block -optional
+    //copyright
+    // link - website link
+
     public function categoriesSelectBox($name)
     {
         $categories = $this->categories();

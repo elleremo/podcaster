@@ -21,12 +21,13 @@ echo '<?xml version="1.0" encoding="' . get_option('blog_charset') . '"?' . '>';
         <itunes:keywords>Mojo media , Mojo podcasts,Дикие утки, Работник месяца, Ребята, мы потрахались , Мы в этом
             живем, Подкасты, подкаст, itunes, podster , soundcloud
         </itunes:keywords>
-        <link>
-        https://mojomedia.ru</link>
+        <link>https://mojomedia.ru</link>
+        <pubDate>Wed, 04 Jan 2017 08:52:14 +0000</pubDate>
+        <ttl>60</ttl>
+        <webMaster>feeds@soundcloud.com (SoundCloud Feeds)</webMaster>
         <description>Подкасты издательства Mojo Media - дикие утки, работник месяца, ребята, мы потрахались и мы в этом
             живем
         </description>
-        <pubDate>Wed, 04 Jan 2017 08:52:14 +0000</pubDate>
         <lastBuildDate>Thu, 23 May 2019 22:05:00 +0000</lastBuildDate>
         <language>ru</language>
         <copyright>All rights reserved MojoMedia</copyright>
@@ -53,6 +54,9 @@ echo '<?xml version="1.0" encoding="' . get_option('blog_charset') . '"?' . '>';
             <link>
             https://mojomedia.ru</link>
         </image>
+        <itunes:image>
+            <url>https://mojomedia.ru/wp-content/uploads/2018/09/cropped-icon.png</url>
+        </itunes:image>
         <itunes:category text="Society &amp; Culture"/>
         <media:copyright>All rights reserved MojoMedia</media:copyright>
         <media:thumbnail url="https://mojomedia.ru/wp-content/uploads/2018/09/cropped-icon.png"/>
