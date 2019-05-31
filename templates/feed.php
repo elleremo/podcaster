@@ -44,6 +44,7 @@ echo '<?xml version="1.0" encoding="' . get_option('blog_charset') . '"?' . '>';
             <itunes:name>Команда MojoMedia</itunes:name>
             <itunes:email>bilirium@gmail.com</itunes:email>
         </itunes:owner>
+
         <itunes:explicit>yes</itunes:explicit>
         <googleplay:explicit>yes</googleplay:explicit>
         <itunes:image href="https://mojomedia.ru/wp-content/uploads/2018/09/cropped-icon.png"/>
@@ -54,9 +55,8 @@ echo '<?xml version="1.0" encoding="' . get_option('blog_charset') . '"?' . '>';
             <link>
             https://mojomedia.ru</link>
         </image>
-        <itunes:image>
-            <url>https://mojomedia.ru/wp-content/uploads/2018/09/cropped-icon.png</url>
-        </itunes:image>
+        <itunes:image href="https://mojomedia.ru/wp-content/uploads/2018/09/cropped-icon.png"/>
+
         <itunes:category text="Society &amp; Culture"/>
         <media:copyright>All rights reserved MojoMedia</media:copyright>
         <media:thumbnail url="https://mojomedia.ru/wp-content/uploads/2018/09/cropped-icon.png"/>

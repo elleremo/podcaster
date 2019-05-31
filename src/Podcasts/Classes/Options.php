@@ -6,6 +6,41 @@ namespace Podcasts\Classes;
 class Options
 {
 
+    public static $slug = 'podcasts-option';
+    private $type;
+
+    public function __construct($type)
+    {
+        $this->type = $type;
+        add_action('admin_menu', [$this, 'subPage']);
+    }
+
+    public function subPage()
+    {
+        add_submenu_page(
+            "edit.php?post_type=" . self::$slug,
+            'Podcasts settings',
+            'Podcasts options',
+            'manage_options',
+            self::$slug,
+            [$this, 'PageContent']
+        );
+    }
+
+    public function PageContent(){
+        ?>
+        <div class="wrap">
+            <h2> <?php echo get_admin_page_title(); ?> </h2>
+        </div>
+        <form method="POST" action="options.php">
+            <?php
+            settings_fields(self::$slug);
+            do_settings_sections(self::$slug);
+            submit_button();
+            ?>
+        </form>
+        <?php
+    }
 
     //explicit
     //subtitle
