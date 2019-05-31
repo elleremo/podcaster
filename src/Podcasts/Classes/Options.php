@@ -22,7 +22,7 @@ class Options
             "edit.php?post_type=" . self::$slug,
             'Podcasts settings',
             'Podcasts options',
-            'manage_options',
+            'edit_others_posts',
             self::$slug,
             [$this, 'PageContent']
         );
