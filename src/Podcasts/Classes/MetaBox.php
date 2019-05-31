@@ -46,96 +46,6 @@ class MetaBox
     }
 
     /**
-     * Возвращает категории подкастов
-     *
-     * @return array
-     */
-    public function categories()
-    {
-        return [
-            'Arts & Entertainment' => [
-                'Architecture',
-                'Books',
-                'Design',
-                'Entertainment',
-                'Games',
-                'Performing Arts',
-                'Photography',
-                'Poetry',
-                'Science Fiction',
-            ],
-            'Audio Blogs',
-            'Business' => [
-                'Careers',
-                'Finance',
-                'Investing',
-                'Management',
-                'Marketing',
-            ],
-            'Comedy',
-            'Education' => [
-                'K-12',
-                'Higher Education'
-            ],
-            'Food',
-            'Health' => [
-                'Diet & Nutrition',
-                'Fitness',
-                'Relationships',
-                'Self-Help',
-                'Sexuality',
-            ],
-            'International' => [
-                'Australian',
-                'Belgian',
-                'Brazilian',
-                'Canadian',
-                'Chinese',
-                'utch',
-                'French',
-                'German',
-                'Hebrew',
-                'Italian',
-                'Japanese',
-                'Norwegian',
-                'Polish',
-                'Portuguese',
-                'Spanish',
-                'Swedish',
-            ],
-            'Movies & Television',
-            'Music',
-            'News',
-            'Politics',
-            'Public Radio',
-            'Religion & Spirituality' => [
-                'Buddhism',
-                'Christianity',
-                'Islam',
-                'Judaism',
-                'New Age',
-                'Philosophy',
-                'Spirituality',
-            ],
-            'Science',
-            'Sports',
-            'Talk Radio',
-            'Technology' => [
-                'Computers',
-                'Developers',
-                'Gadgets',
-                'Information Technology',
-                'News',
-                'Operating Systems',
-                'Podcasting',
-                'Smart Phones',
-                'Text/Speech',
-            ],
-            'Travel'
-        ];
-    }
-
-    /**
      * Добавляем метабокс
      */
     public function addFields()
@@ -198,21 +108,6 @@ class MetaBox
             <label>
                 summary:<br>
                 <textarea type="summary" maxlength="4000" name="<?php echo self::$fieldPrefix; ?>[summary]"><?php echo $this->getData($post->ID, 'summary'); ?></textarea>
-            </label>
-        </p>
-
-        <p>
-            <label>
-                copyright:<br>
-                <input type="text" name="<?php echo self::$fieldPrefix; ?>[copyright]" value="<?php echo $this->getData($post->ID, 'copyright'); ?>"/>
-            </label>
-        </p>
-
-        <p>
-            <label>
-                link: <br>
-                <!--                https://creativecommons.org/licenses/by/4.0/-->
-                <input type="link" name="<?php echo self::$fieldPrefix; ?>[link]" value="<?php echo $this->getData($post->ID, 'link'); ?>"/>
             </label>
         </p>
 
