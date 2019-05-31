@@ -14,6 +14,14 @@ class File
         $this->data = wp_get_attachment_metadata($this->id);
     }
 
+    public function getDuration(){
+
+        if (!isset($this->data['length_formatted'])) {
+            return false;
+        }
+        return $this->data['length_formatted'];
+    }
+
     public function getMimeType()
     {
         if (!isset($this->data['mime_type'])) {
