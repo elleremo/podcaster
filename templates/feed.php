@@ -60,29 +60,29 @@ echo '<?xml version="1.0" encoding="' . get_option('blog_charset') . '"?' . '>';
             живем, Подкасты, подкаст, itunes, podster , soundcloud
         </media:keywords>
         <creativeCommons:license>https://creativecommons.org/licenses/by/4.0/</creativeCommons:license>
-        <generator>https://wordpress.org/?v=5.2.1</generator>
+        <generator><?php the_generator('atom'); ?></generator>
 
         <?php foreach ($atts['posts'] as $post) : ?>
 
             <item>
                 <title><?php echo esc_html($post->post_title); ?></title>
                 <link><?php echo esc_html(add_query_arg(site_url(), ['?' => get_the_ID()])); ?></link>
-                <pubDate><?php echo esc_html(mysql2date('D, d M Y H:i:s +0000', get_post_time('Y-m-d H:i:s', true, $post), false)); ?></pubDate>
-                <dc:creator>Команда MojoMedia</dc:creator>
-                <guid isPermaLink="false">https://mojomedia.ru/?post_type=audio&#038;p=1037</guid>
-                <description><![CDATA[<?php echo $post['meta']['description']; ?>]]></description>
+                <pubDate><?php echo esc_html(mysql2date('D, d M Y H:i:s +0000', $post['post_date'], false)); ?></pubDate>
 
-                <itunes:subtitle><![CDATA[<?php echo $post['meta']['description']; ?>]]></itunes:subtitle>
+                <guid isPermaLink="false"><?php echo esc_html(add_query_arg(site_url(), ['p' => $post['ID']])); ?></guid>
+                <itunes:subtitle><![CDATA[<?php echo $post['meta']['subtitle']; ?>]]></itunes:subtitle>
                 <itunes:image href="https://mojomedia.ru/wp-content/uploads/2018/09/my-v-etom-zhivyom.png"/>
+
+                <description><![CDATA[<?php echo $post['meta']['description']; ?>]]></description>
+                <googleplay:description><![CDATA[<?php echo $post['meta']['description']; ?>]]></googleplay:description>
                 <content:encoded><![CDATA[<?php echo $post['meta']['description']; ?>]]></content:encoded>
+
                 <itunes:summary><![CDATA[<?php echo $post['meta']['summary']; ?>]]></itunes:summary>
 
-                <googleplay:description><![CDATA[<?php echo $post['meta']['description']; ?>]]>
-                </googleplay:description>
+
                 <enclosure url="<?php echo $post['meta']['audio_meta']['url']; ?>"
                            length="<?php echo $post['meta']['audio_meta']['fileSize']; ?>"
                            type="<?php echo $post['meta']['audio_meta']['type']; ?>"/>
-
                 <media:content url="<?php echo $post['meta']['audio_meta']['url']; ?>"
                                fileSize="<?php echo $post['meta']['audio_meta']['fileSize']; ?>"
                                type="<?php echo $post['meta']['audio_meta']['type']; ?>"/>
@@ -90,9 +90,10 @@ echo '<?xml version="1.0" encoding="' . get_option('blog_charset') . '"?' . '>';
                 <itunes:explicit><?php echo $post['meta']['explicit']; ?></itunes:explicit>
                 <googleplay:explicit><?php echo $post['meta']['explicit']; ?></googleplay:explicit>
 
-                <itunes:duration>50:20</itunes:duration>
+                <itunes:duration><?php $post['meta']['audio_meta']['duration']; ?></itunes:duration>
 
-                <itunes:author>Команда MojoMedia</itunes:author>
+                <dc:creator><?php echo $post['meta']['author']; ?></dc:creator>
+                <itunes:author><?php echo $post['meta']['author']; ?></itunes:author>
             </item>
 
         <?php endforeach; ?>
