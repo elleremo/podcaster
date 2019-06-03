@@ -110,6 +110,18 @@ class Options
 
         $this->field(
             'base',
+            'email',
+            [
+                'tag' => 'input',
+                'attrs' => [
+                    'required' => 'required',
+                    'type' => 'email',
+                ]
+            ]
+        );
+
+        $this->field(
+            'base',
             'explicit',
             [
                 'tag' => 'select',
