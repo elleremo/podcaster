@@ -137,6 +137,22 @@ class Options
             ]
         );
 
+        $this->field(
+            'base',
+            'block',
+            [
+                'tag' => 'select',
+                'attrs' => [
+                    'required' => 'required'
+                ],
+                'options' => [
+                    'yes' => 'yes',
+                    'no' => 'no',
+                ],
+                'selected' => 'no',
+            ]
+        );
+
         register_setting(self::$slug, self::$slug);
     }
 
