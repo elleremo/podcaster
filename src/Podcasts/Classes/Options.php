@@ -21,10 +21,8 @@ class Options
         add_action('admin_menu', [$this, 'subPage']);
     }
 
-    //explicit
     //owner - email - name
     //image - 170x170 / 300x300 jpg png
-    //block -optional
 
     public function subPage()
     {
@@ -150,6 +148,18 @@ class Options
                     'no' => 'no',
                 ],
                 'selected' => 'no',
+            ]
+        );
+
+        $this->field(
+            'base',
+            'image',
+            [
+                'tag' => 'input',
+                'attrs' => [
+                    'required' => 'required',
+                    'type' => 'number',
+                ]
             ]
         );
 
