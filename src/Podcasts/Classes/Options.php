@@ -131,8 +131,6 @@ class Options
 
     private function field($sectionPrefix, $name = '', $data = [])
     {
-        $this->fields[] = $name;
-
         $value = $this->fieldsValues;
 
         add_settings_field(
