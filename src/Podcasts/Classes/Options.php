@@ -10,7 +10,6 @@ class Options
 
     public static $slug = 'podcasts-option';
     private $type;
-    private $fields = [];
     private $fieldsValues = [];
 
     public function __construct($type)
