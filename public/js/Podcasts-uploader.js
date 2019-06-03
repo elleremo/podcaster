@@ -37,13 +37,13 @@ var PodcastsUploader = {
 
     this_class.mediaUploader = wp.media({
 
-      title: 'Title',
+      title: PodcastsUploaderLocalize.title,
       library: {
         type: ['audio'],
       },
       multiple: false,
       button: {
-        text: 'text',
+        text: PodcastsUploaderLocalize.button,
       },
 
     })
