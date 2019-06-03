@@ -41,7 +41,21 @@ class MetaBox
     {
         $screen = get_current_screen();
         if ('post' == $screen->base && $this->typePost == $screen->post_type) {
-            $this->addJs('uploader', 'admin');
+            $handle = $this->addJs('uploader', 'admin');
+
+            add_action('admin_enqueue_scripts', function () use ($handle) {
+
+                wp_localize_script(
+                    $handle
+                    , 'PodcastsUploaderLocalize',
+                    [
+                        'title' => __('Select audio file', 'Podcasts'),
+                        'button' => __('Select', 'Podcasts')
+                    ]
+                );
+
+            });
+
         }
     }
 
