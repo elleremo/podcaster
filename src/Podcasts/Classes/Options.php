@@ -179,11 +179,11 @@ class Options
         } else if ('textarea' == $data['tag']) {
             $out = "<textarea name='{$commonNamePrefix}[{$data['name']}]' class='{$class}' {$attributes()} >{$data['value']}</textarea>";
         } else if ('select' == $data['tag']) {
-            $out .= "<section name='{$commonNamePrefix}[{$data['name']}]' class='{$class}' {$attributes()} >";
+            $out .= "<select name='{$commonNamePrefix}[{$data['name']}]' class='{$class}' {$attributes()} >";
             foreach ($data['options'] as $key => $value) {
                 $out .= "<option value='{$key}' " . selected($data['selected'], $key, false) . " >{$value}</option>";
             }
-            $out .= "</section>";
+            $out .= "</select>";
         }
 
         return $out;
