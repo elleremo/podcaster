@@ -3,16 +3,22 @@
 namespace Podcasts\Classes;
 
 
+use Podcasts\Data\ExtractOptions;
+
 class Options
 {
 
     public static $slug = 'podcasts-option';
     private $type;
-    private $fields =[];
+    private $fields = [];
+    private $fieldsValues = [];
 
     public function __construct($type)
     {
         $this->type = $type;
+        $options = new ExtractOptions(self::$slug);
+        $this->fieldsValues = $options->getData();
+
         add_action('admin_menu', [$this, 'subPage']);
     }
 
@@ -123,14 +129,17 @@ class Options
         register_setting(self::$slug, self::$slug);
     }
 
-    private function field($sectionPrefix, $name = '', $data = '')
+    private function field($sectionPrefix, $name = '', $data = [])
     {
-        $this->fields[]=$name;
+        $this->fields[] = $name;
+
+        $value = $this->fieldsValues;
 
         add_settings_field(
             self::$slug . "_{$name}_field",
             $name,
-            function () use ($name, $data) {
+            function () use ($value, $name, $data) {
+                $data['value'] = (isset($value[$name]) ? $value[$name] : '');
                 echo $this->fieldRender($name, $data);
             },
             self::$slug,
