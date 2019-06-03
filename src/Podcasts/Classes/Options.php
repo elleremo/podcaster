@@ -8,7 +8,7 @@ class Options
 
     public static $slug = 'podcasts-option';
     private $type;
-    public static $optionCommonPrefix = 'podcasts-option';
+    private $fields =[];
 
     public function __construct($type)
     {
@@ -120,11 +120,13 @@ class Options
             ]
         );
 
-        register_setting(self::$slug, self::$optionCommonPrefix);
+        register_setting(self::$slug, self::$slug);
     }
 
     private function field($sectionPrefix, $name = '', $data = '')
     {
+        $this->fields[]=$name;
+
         add_settings_field(
             self::$slug . "_{$name}_field",
             $name,
@@ -134,7 +136,6 @@ class Options
             self::$slug,
             self::$slug . "_{$sectionPrefix}_section"
         );
-
     }
 
     private function fieldRender($name, $data)
@@ -153,7 +154,7 @@ class Options
 
         $data = wp_parse_args($data, $default);
 
-        $commonNamePrefix = self::$optionCommonPrefix;
+        $commonNamePrefix = self::$slug;
 
         $class = ' regular-text ';
 
