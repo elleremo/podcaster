@@ -67,10 +67,10 @@ class Options
             [$this, 'PageContent']
         );
 
-        $this->section('base', "Common settings", "<p> Settings </p>");
+        $baseSection = $this->section('base', "Common settings", "<p> Settings </p>");
 
         $this->field(
-            'base',
+            $baseSection,
             'title',
             [
                 'tag' => 'input',
@@ -81,7 +81,7 @@ class Options
         );
 
         $this->field(
-            'base',
+            $baseSection,
             'link',
             [
                 'tag' => 'input',
@@ -93,7 +93,7 @@ class Options
         );
 
         $this->field(
-            'base',
+            $baseSection,
             'subtitle',
             [
                 'tag' => 'textarea',
@@ -105,7 +105,7 @@ class Options
         );
 
         $this->field(
-            'base',
+            $baseSection,
             'summary',
             [
                 'tag' => 'textarea',
@@ -117,7 +117,7 @@ class Options
         );
 
         $this->field(
-            'base',
+            $baseSection,
             'author',
             [
                 'tag' => 'input',
@@ -128,7 +128,7 @@ class Options
         );
 
         $this->field(
-            'base',
+            $baseSection,
             'copyright',
             [
                 'tag' => 'input',
@@ -139,7 +139,7 @@ class Options
         );
 
         $this->field(
-            'base',
+            $baseSection,
             'email',
             [
                 'tag' => 'input',
@@ -151,7 +151,7 @@ class Options
         );
 
         $this->field(
-            'base',
+            $baseSection,
             'explicit',
             [
                 'tag' => 'select',
@@ -168,7 +168,7 @@ class Options
         );
 
         $this->field(
-            'base',
+            $baseSection,
             'block',
             [
                 'tag' => 'select',
@@ -184,13 +184,41 @@ class Options
         );
 
         $this->field(
-            'base',
+            $baseSection,
             'image',
             [
                 'tag' => 'input',
                 'attrs' => [
                     'required' => 'required',
                     'type' => 'number',
+                ]
+            ]
+        );
+
+        $ownerSection = $this->section('owner', "Common settings", "<p> Owner </p>");
+
+        $this->field(
+            $ownerSection,
+            'owner_name',
+            [
+                'label' => __('Owner name','Podcasts'),
+                'tag' => 'input',
+                'attrs' => [
+                    'required' => 'required',
+                    'type' => 'text',
+                ]
+            ]
+        );
+
+        $this->field(
+            $ownerSection,
+            'owner_email',
+            [
+                'label' => __('Owner email','Podcasts'),
+                'tag' => 'input',
+                'attrs' => [
+                    'required' => 'required',
+                    'type' => 'email',
                 ]
             ]
         );
@@ -204,7 +232,7 @@ class Options
 
         add_settings_field(
             self::$slug . "_{$name}_field",
-            $name,
+            isset($data['label']) ? $data['label'] : $name,
             function () use ($value, $name, $data) {
                 $data['value'] = (isset($value[$name]) ? $value[$name] : '');
                 echo $this->fieldRender($name, $data);
@@ -276,6 +304,8 @@ class Options
             },
             self::$slug
         );
+
+        return $prefix;
     }
 
     public function PageContent()
