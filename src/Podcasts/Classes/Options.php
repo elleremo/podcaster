@@ -132,7 +132,7 @@ class Options
             $descriptionSection,
             'author',
             [
-                'label' => __('Author name','Podcasts'),
+                'label' => __('Author name', 'Podcasts'),
                 'tag' => 'input',
                 'attrs' => [
                     'required' => 'required'
@@ -187,14 +187,13 @@ class Options
         );
 
 
-
         $ownerSection = $this->section('owner', "Common settings", "");
 
         $this->field(
             $ownerSection,
             'owner_name',
             [
-                'label' => __('Owner name','Podcasts'),
+                'label' => __('Owner name', 'Podcasts'),
                 'tag' => 'input',
                 'attrs' => [
                     'required' => 'required',
@@ -207,7 +206,7 @@ class Options
             $ownerSection,
             'owner_email',
             [
-                'label' => __('Owner email','Podcasts'),
+                'label' => __('Owner email', 'Podcasts'),
                 'tag' => 'input',
                 'attrs' => [
                     'required' => 'required',
@@ -258,6 +257,10 @@ class Options
         if (isset($data['attrs']['class'])) {
             $class .= $data['attrs']['class'];
             unset($data['attrs']['class']);
+        }
+
+        if (!isset($data['attrs']['type'])) {
+            $data['attrs']['type'] = 'text';
         }
 
         $attributes = function () use ($data) {
