@@ -140,7 +140,15 @@ class Options
             ]
         );
 
-        $extraSection = $this->section('base', "Extra settings", "");
+
+        $this->field(
+            $descriptionSection,
+            'category',
+            [],
+            $this->categoriesSelectBox(self::$slug . '[category]')
+        );
+
+        $extraSection = $this->section('extra', "Extra settings", "");
 
         $this->field(
             $extraSection,
@@ -186,7 +194,6 @@ class Options
             ]
         );
 
-
         $ownerSection = $this->section('owner', "Common settings", "");
 
         $this->field(
@@ -209,7 +216,6 @@ class Options
                 'label' => __('Owner email', 'Podcasts'),
                 'tag' => 'input',
                 'attrs' => [
-                    'required' => 'required',
                     'type' => 'email',
                 ]
             ]
@@ -218,16 +224,20 @@ class Options
         register_setting(self::$slug, self::$slug);
     }
 
-    private function field($sectionPrefix, $name = '', $data = [])
+    private function field($sectionPrefix, $name = '', $data = [], $html = false)
     {
         $value = $this->fieldsValues;
 
         add_settings_field(
             self::$slug . "_{$name}_field",
             isset($data['label']) ? $data['label'] : $name,
-            function () use ($value, $name, $data) {
+            function () use ($html, $value, $name, $data) {
                 $data['value'] = (isset($value[$name]) ? $value[$name] : '');
-                echo $this->fieldRender($name, $data);
+                if (false == $html) {
+                    echo $this->fieldRender($name, $data);
+                } else {
+                    echo $html;
+                }
             },
             self::$slug,
             self::$slug . "_{$sectionPrefix}_section"
@@ -325,7 +335,7 @@ class Options
         $categories = $this->categories();
 
         $html = '';
-        $html .= "<select name='{$name}' multiple='multiple' required='required'>";
+        $html .= "<select name='{$name}' required='required'>";
 
         $iterator = function ($array) {
             $html = '';
