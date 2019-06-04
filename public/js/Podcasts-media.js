@@ -8,7 +8,7 @@ var PodcastsUploader = {
 
     var this_class = this
 
-    this_class.trigger('[name="podcats[audio]"]')
+    this_class.trigger('[name="podcasts-option[image]"]')
   },
 
   trigger: function (selector) {
@@ -38,13 +38,13 @@ var PodcastsUploader = {
 
     this_class.mediaUploader = wp.media({
 
-      title: PodcastsUploaderLocalize.title,
+      title: PodcastsImageUploaderLocalize.title,
       library: {
-        type: ['audio'],
+        type: ['image'],
       },
       multiple: false,
       button: {
-        text: PodcastsUploaderLocalize.button,
+        text: PodcastsImageUploaderLocalize.button,
       },
 
     })

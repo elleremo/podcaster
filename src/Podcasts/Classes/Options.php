@@ -4,9 +4,11 @@ namespace Podcasts\Classes;
 
 
 use Podcasts\Data\ExtractOptions;
+use Podcasts\Utils\Assets;
 
 class Options
 {
+    use Assets;
 
     public static $slug = 'podcasts-option';
     private $type;
@@ -19,6 +21,36 @@ class Options
         $this->fieldsValues = $options->getData();
 
         add_action('admin_menu', [$this, 'subPage']);
+        add_action('current_screen', [$this, 'addJsCss']);
+    }
+
+    public function addJsCss()
+    {
+
+        $screen = get_current_screen();
+
+        if ("podcast_page_podcasts-option" == $screen->base) {
+
+
+            add_action('admin_enqueue_scripts', function () {
+                wp_enqueue_media();
+            }, 1);
+
+            $handle = $this->addJs('Media', 'admin');
+            add_action('admin_enqueue_scripts', function () use ($handle) {
+
+                wp_localize_script(
+                    $handle
+                    , 'PodcastsImageUploaderLocalize',
+                    [
+                        'title' => __('Select image', 'Podcasts'),
+                        'button' => __('Select', 'Podcasts')
+                    ]
+                );
+
+            });
+
+        }
     }
 
     //owner - email - name
