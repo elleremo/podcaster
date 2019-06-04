@@ -67,21 +67,10 @@ class Options
             [$this, 'PageContent']
         );
 
-        $baseSection = $this->section('base', "Common settings", "<p> Settings </p>");
+        $descriptionSection = $this->section('description', "Description", "");
 
         $this->field(
-            $baseSection,
-            'title',
-            [
-                'tag' => 'input',
-                'attrs' => [
-                    'required' => 'required'
-                ]
-            ]
-        );
-
-        $this->field(
-            $baseSection,
+            $descriptionSection,
             'link',
             [
                 'tag' => 'input',
@@ -93,7 +82,18 @@ class Options
         );
 
         $this->field(
-            $baseSection,
+            $descriptionSection,
+            'title',
+            [
+                'tag' => 'input',
+                'attrs' => [
+                    'required' => 'required'
+                ]
+            ]
+        );
+
+        $this->field(
+            $descriptionSection,
             'subtitle',
             [
                 'tag' => 'textarea',
@@ -105,7 +105,7 @@ class Options
         );
 
         $this->field(
-            $baseSection,
+            $descriptionSection,
             'summary',
             [
                 'tag' => 'textarea',
@@ -117,9 +117,22 @@ class Options
         );
 
         $this->field(
-            $baseSection,
+            $descriptionSection,
+            'image',
+            [
+                'tag' => 'input',
+                'attrs' => [
+                    'required' => 'required',
+                    'type' => 'number',
+                ]
+            ]
+        );
+
+        $this->field(
+            $descriptionSection,
             'author',
             [
+                'label' => __('Author name','Podcasts'),
                 'tag' => 'input',
                 'attrs' => [
                     'required' => 'required'
@@ -127,8 +140,10 @@ class Options
             ]
         );
 
+        $extraSection = $this->section('base', "Extra settings", "");
+
         $this->field(
-            $baseSection,
+            $extraSection,
             'copyright',
             [
                 'tag' => 'input',
@@ -139,19 +154,7 @@ class Options
         );
 
         $this->field(
-            $baseSection,
-            'email',
-            [
-                'tag' => 'input',
-                'attrs' => [
-                    'required' => 'required',
-                    'type' => 'email',
-                ]
-            ]
-        );
-
-        $this->field(
-            $baseSection,
+            $extraSection,
             'explicit',
             [
                 'tag' => 'select',
@@ -168,7 +171,7 @@ class Options
         );
 
         $this->field(
-            $baseSection,
+            $extraSection,
             'block',
             [
                 'tag' => 'select',
@@ -183,19 +186,9 @@ class Options
             ]
         );
 
-        $this->field(
-            $baseSection,
-            'image',
-            [
-                'tag' => 'input',
-                'attrs' => [
-                    'required' => 'required',
-                    'type' => 'number',
-                ]
-            ]
-        );
 
-        $ownerSection = $this->section('owner', "Common settings", "<p> Owner </p>");
+
+        $ownerSection = $this->section('owner', "Common settings", "");
 
         $this->field(
             $ownerSection,
